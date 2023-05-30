@@ -7,14 +7,9 @@ composer require yuyue8/tp_queue
 
 ## 使用方法
 
-使用前需要安装`topthink/think-queue`插件
-~~~
-composer require topthink/think-queue
-~~~
-
 创建 `jobs` 类
 ```
-php make:jobs /data/jobs/Sms
+php think make:jobs /data/jobs/Sms
 ```
 
 使用方法如下：
