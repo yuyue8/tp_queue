@@ -5,7 +5,7 @@ namespace Yuyue8\TpQueue\utils;
 use think\facade\Config;
 use think\facade\Queue as QueueThink;
 use think\facade\Log;
-use Yuyue8\Tpcores\traits\ErrorTrait;
+use Yuyue8\TpQueue\traits\ErrorTrait;
 
 /**
  * Class Queue

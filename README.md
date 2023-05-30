@@ -25,3 +25,12 @@ $job->dispatch(['参数1','参数2'...]);
 $job->dispatchSece('延迟时间',['参数1','参数2'...]);
 $job->dispatchDo('执行方法名',['参数1','参数2'...],'延长时间');
 ```
+
+## 监听任务并执行
+
+```bash
+&> php think queue:listen
+php think queue:listen --queue Sms
+
+&> php think queue:work
+```

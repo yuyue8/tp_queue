@@ -25,6 +25,8 @@ class MakeJobs extends Command
     {
         $classname = trim($input->getArgument('name'));
 
+        $classname = ltrim(str_replace('\\', '/', $classname), '/');
+
         $pathname = $this->getPathName($classname);
 
         if (is_file($pathname)) {
@@ -45,18 +47,18 @@ class MakeJobs extends Command
     {
         $stub = file_get_contents($this->getStub());
 
-        $namespace = trim(implode('\\', array_slice(explode('\\', $classname), 0, -1)), '\\');
+        $namespace = trim(implode('/', array_slice(explode('/', $classname), 0, -1)), '/');
 
-        $class = str_replace($namespace . '\\', '', $classname);
+        $class = str_replace($namespace . '/', '', $classname);
 
         return str_replace(['{%className%}', '{%namespace%}'], [
             $class,
-            $namespace
+            str_replace('/', '\\', $namespace)
         ], $stub);
     }
 
     protected function getPathName(string $classname): string
     {
-        return $this->app->getRootPath() . ltrim(str_replace('\\', '/', $classname), '/') . '.php';
+        return $this->app->getRootPath() . $classname . 'Jobs.php';
     }
 }
