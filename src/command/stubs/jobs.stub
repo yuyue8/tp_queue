@@ -2,7 +2,7 @@
 
 namespace {%namespace%};
 
-use Yuyue8\TpQueue\basic\BaseJobs;
+use {%baseClass%} BaseJobs;
 use Yuyue8\TpQueue\traits\QueueTrait;
 
 /**

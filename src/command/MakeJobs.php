@@ -6,6 +6,7 @@ use think\console\Command;
 use think\console\Input;
 use think\console\input\Argument;
 use think\console\Output;
+use think\facade\Config;
 
 class MakeJobs extends Command
 {
@@ -51,9 +52,10 @@ class MakeJobs extends Command
 
         $class = str_replace($namespace . '/', '', $classname);
 
-        return str_replace(['{%className%}', '{%namespace%}'], [
+        return str_replace(['{%className%}', '{%namespace%}', '{%baseClass%}'], [
             $class,
-            str_replace('/', '\\', $namespace)
+            str_replace('/', '\\', $namespace),
+            Config::get('queue.base_class', Yuyue8\TpQueue\basic\BaseJobs::class)
         ], $stub);
     }
 
