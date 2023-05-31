@@ -25,7 +25,10 @@
         "think": {
             "services": [
                 "Yuyue8\\TpQueue\\Service"
-            ]
+            ],
+            "config": {
+                "tp_config": "src/config/tp_config.php"
+            }
         }
     }
 }

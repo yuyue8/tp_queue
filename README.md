@@ -9,10 +9,10 @@ composer require yuyue8/tp_queue
 
 默认使用 `Yuyue8\TpQueue\basic\BaseJobs` 类执行任务，若需自定义执行类，
 只需继承 `Yuyue8\TpQueue\basic\BaseJobs` 类，并重置 `fire` 方法，
-然后在`queue`配置文件中添加 `base_class` 参数，值为自定义类
+然后在`tp_config`配置文件中添加 `base_jobs_class` 参数，值为自定义类
 例如：
 ```
-'base_class' => \app\basic\Job::class
+'base_jobs_class' => \app\basic\Job::class
 ```
 
 然后创建 `jobs` 类
