@@ -55,7 +55,7 @@ class MakeJobs extends Command
         return str_replace(['{%className%}', '{%namespace%}', '{%baseClass%}'], [
             $class,
             str_replace('/', '\\', $namespace),
-            Config::get('queue.base_class', Yuyue8\TpQueue\basic\BaseJobs::class)
+            Config::get('queue.base_class', \Yuyue8\TpQueue\basic\BaseJobs::class)
         ], $stub);
     }
 
