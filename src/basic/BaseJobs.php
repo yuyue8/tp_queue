@@ -12,7 +12,7 @@ use think\queue\Job;
 abstract class BaseJobs
 {
     protected $queueName = '';
-    
+
     /**
      * @param $name
      * @param $arguments
@@ -29,9 +29,9 @@ abstract class BaseJobs
      */
     public function fire(Job $job, $data): void
     {
-        $action     = $data['do'] ?? 'doJob';//任务名
-        $infoData   = $data['data'] ?? [];//执行数据
-        $errorCount = $data['errorCount'] ?? 0;//最大错误次数
+        $action     = $data['do'] ?? 'doJob'; //任务名
+        $infoData   = $data['data'] ?? []; //执行数据
+        $errorCount = $data['errorCount'] ?? 0; //最大错误次数
 
         try {
             $this->runJob($action, $job, $infoData, $errorCount);
@@ -55,11 +55,14 @@ abstract class BaseJobs
             $job->delete();
         }
 
-        if ($this->{$action}(...$infoData)) {
+        $result = $this->{$action}(...$infoData);
+
+        if ($result === true) {
             //删除任务
             $job->delete();
         } else {
             if ($job->attempts() >= $errorCount && $errorCount) {
+                event('JobsFailListener', [get_class($this), $action, $infoData]);
                 //删除任务
                 $job->delete();
             } else {
@@ -67,6 +70,5 @@ abstract class BaseJobs
                 $job->release();
             }
         }
-
     }
 }

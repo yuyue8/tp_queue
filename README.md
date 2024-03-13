@@ -1,9 +1,10 @@
 # TpQueue
 
 ## 安装
-~~~
+
+```
 composer require yuyue8/tp_queue
-~~~
+```
 
 ## 使用方法
 
@@ -12,16 +13,21 @@ composer require yuyue8/tp_queue
 然后在`tp_config`配置文件中添加 `base_jobs_class` 参数，值为自定义类
 
 例如：
+
 ```
 'base_jobs_class' => \app\basic\Job::class
 ```
 
 然后创建 `jobs` 类
+
 ```
 php think make:jobs /data/jobs/Sms
 ```
 
+> 在 `jobs` 类中，返回 `true` 表示消费成功，其他返回值表示消费失败，将会进入重新投递，重新投递次数用完依然没有消费成功，删除此消息，并执行 `JobsFailListener` 事件, `JobsFailListener` 该事件需要自己创建并注册
+
 使用方法如下：
+
 ```php
 /** @var Sms $job */
 $job = app(Sms::class);

@@ -17,6 +17,13 @@ class {%className%}Jobs extends BaseJobs
 
     public function doJob()
     {
+        try {
+            ...消息处理
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th->getMessage();
+        }
+        
         return true;
     }
 }
